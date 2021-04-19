@@ -4,6 +4,10 @@
 	import Redir from "./Redir.svelte";
 
 	const routes = {"*": Redir};
+
+	if ($location === "/") {
+		replace("/docs");
+	}
 </script>
 
 <MDPWrapper styles={{
