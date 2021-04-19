@@ -1,8 +1,9 @@
 <script>
-	import Router from 'svelte-spa-router';
-	import MDPWrapper from 'rollup-plugin-mdsvex-pages/src/components/MDPWrapper.svelte';
+	import Router, {replace, location} from "svelte-spa-router";
+	import MDPWrapper from "rollup-plugin-mdsvex-pages/src/components/MDPWrapper.svelte";
+	import Redir from "./Redir.svelte";
 
-	const routes = {};
+	const routes = {"*": Redir};
 </script>
 
 <MDPWrapper styles={{
