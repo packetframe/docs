@@ -1,6 +1,12 @@
 {
   "sidebar": {
     "docs": {
+      "Platform": [
+        {
+          "route": "",
+          "label": "Home"
+        }
+      ],
       "API": [
         {
           "route": "auth",
@@ -16,6 +22,7 @@
         }
       ],
       "default-open": [
+        "Platform",
         "API"
       ]
     }
