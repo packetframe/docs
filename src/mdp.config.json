@@ -22,12 +22,7 @@
   },
   "navbar": {
     "docs": {
-      "links": [
-        {
-          "route": "https://test.com",
-          "label": "Main"
-        }
-      ],
+      "links": [],
       "title": "Packetframe Docs",
       "logo": {
         "alt": "Packetframe Logo",
