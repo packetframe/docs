@@ -1,5 +1,5 @@
 <script>
-	import Router, {replace, location} from "svelte-spa-router";
+	import Router from "svelte-spa-router";
 	import MDPWrapper from "rollup-plugin-mdsvex-pages/src/components/MDPWrapper.svelte";
 	import Redir from "./Redir.svelte";
 
