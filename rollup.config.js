@@ -43,6 +43,7 @@ export default {
 		}),
 
 		svelte({
+			extensions: [".svelte", ".md"],
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production

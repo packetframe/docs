@@ -1,65 +1,22 @@
 {
   "sidebar": {
     "docs": {
-      "Getting Started": [
+      "API": [
         {
-          "route": "",
-          "label": "Home"
+          "route": "auth",
+          "label": "Authentication"
         },
         {
-          "route": "gfm",
-          "label": "GFM"
+          "route": "dns",
+          "label": "DNS"
         },
         {
-          "route": "readme",
-          "label": "README"
-        }
-      ],
-      "Another Category": [
-        {
-          "route": "main",
-          "label": "Page 1"
-        },
-        {
-          "route": "gfm",
-          "label": "GFM"
+          "route": "edge",
+          "label": "Edge"
         }
       ],
       "default-open": [
-        "Getting Started"
-      ]
-    },
-    "blog": {
-      "Getting Started": [
-        {
-          "route": "",
-          "label": "Blog"
-        },
-        {
-          "route": "article",
-          "label": "Page 1"
-        },
-        {
-          "route": "gfm",
-          "label": "GFM"
-        },
-        {
-          "route": "readme",
-          "label": "README"
-        }
-      ],
-      "Another Category": [
-        {
-          "route": "main",
-          "label": "Page 1"
-        },
-        {
-          "route": "gfm",
-          "label": "GFM"
-        }
-      ],
-      "default-open": [
-        "Getting Started"
+        "API"
       ]
     }
   },
@@ -67,22 +24,14 @@
     "docs": {
       "links": [
         {
-          "route": "main",
+          "route": "https://test.com",
           "label": "Main"
-        },
-        {
-          "route": "gfm",
-          "label": "Github Markdown"
-        },
-        {
-          "route": "readme",
-          "label": "README"
         }
       ],
-      "title": "MD-Pages",
+      "title": "Packetframe Docs",
       "logo": {
-        "alt": "Site Logo",
-        "src": "favicon.png"
+        "alt": "Packetframe Logo",
+        "src": "https://packetframe.com/static/img/icon.png"
       }
     }
   }
