@@ -38,3 +38,7 @@ thead {
 tbody tr:nth-child(even) {
 	background-color: #121212;
 }
+
+.mdp-wrapper .sidebar {
+	z-index: 20;
+}
