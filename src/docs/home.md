@@ -5,4 +5,8 @@ title: Documentation
 
 # Packetframe Documentation
 
-This is the v4 version of Packetframe. For the current version, see https://packetframe.com/#/docs
+## Getting Started
+
+Packetframe's API exposes all functionality of the Packetframe platform under a single HTTP API.
+
+[DNSControl](https://github.com/StackExchange/dnscontrol/) supports the [Packetframe Provider](https://stackexchange.github.io/dnscontrol/providers/packetframe) to declaratively manage DNS records. 

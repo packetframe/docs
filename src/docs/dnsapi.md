@@ -5,97 +5,172 @@ title: DNS API
 
 # DNS
 
-#### Add a zone
+#### List all DNS zones authorized for a user
 
-`POST /zones`
+`GET /dns/zones`
 
-Required parameters:
+#### Example:
 
-| Name     | Description | Validation    |
-|----------|-------------|---------------|
-| zone     | DNS Zone    | Zone          |
-
-Example response (HTTP 200):
-
-```json
-{
-  "message": "Zone added"
-}
+```bash
+curl -X GET \
+  -H "Authorization: Token <packetframe-api-token>" \
+   https://packetframe.com/api/dns/zones
 ```
 
-#### Get records
+#### Add a new DNS zone
 
-`GET /zones/:zone/records`
+`POST /dns/zones`
 
-Example response (HTTP 200):
+| Name     | Description | Validation |
+|----------|-------------|------------|
+| zone     | DNS Zone    | Zone FQDN  |
 
-```json
-[
-  {
-    "id": "606baec834665f846c7f3e30",
-    "type": "A",
-    "label": "@",
-    "value": "192.0.2.1",
-    "ttl": 300,
-    "proxied": false
-  }
-]
+#### Example:
+
+```shell
+curl -X POST \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "example.com"}' \
+  https://packetframe.com/api/dns/zones
 ```
 
-#### Add a record
+#### Delete a DNS zone
 
-`POST /zones/:zone/records`
+`DELETE /dns/zones`
 
-Required parameters:
+| Name | Description | Validation |
+|------|-------------|------------|
+| id   | Zone ID     |            |
 
-| Name    | Description                   | Validation                                                                |
-|---------|-------------------------------|---------------------------------------------------------------------------|
-| zone    | ID of zone to add record to   |                                                                           |
-| type    | DNS RR Type                   | ("A", "AAAA", "CNAME", "TXT", "MX", "SRV", "NS") and part of valid record |
-| label   | DNS RR Label                  | Less than 255 and part of valid record                                    |
-| value   | DNS RR Value                  | Part of valid record                                                      |
-| ttl     | Time To Live                  | Greater than 0 and part of valid record                                   |
-| proxied | Should the record be proxied? |                                                                           |
+#### Example:
 
-Example response (HTTP 200):
-
-```json
-{
-  "message": "Record added"
-}
+```shell
+curl -X DELETE \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"id": "62244cdb-edb9-48ea-aeed-bad54bb70f9e"}' \
+  https://packetframe.com/api/dns/zones
 ```
 
-#### Delete a record
+#### Add a user to a DNS zone
 
-`DELETE /zones/:zone/records/:record`
+`PUT /dns/zones/user`
 
-Example response (HTTP 200):
+| Name | Description | Validation |
+|------|-------------|------------|
+| zone | Zone ID     |            |
+| user | User email  |            |
 
-```json
-{
-  "message": "Record added"
-}
+
+#### Example:
+
+```shell
+curl -X PUT \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "user": "user1@example.com"}' \
+  https://packetframe.com/api/dns/zones/user
 ```
 
-#### Update a record
+#### Remove a user from a DNS zone
 
-`PATCH /zones/:zone/records`
+`DELETE /dns/zones/user`
 
-Required parameters:
+| Name | Description | Validation |
+|------|-------------|------------|
+| zone | Zone ID     |            |
+| user | User email  |            |
 
-| Name    | Description                   | Validation                                                                |
-|---------|-------------------------------|---------------------------------------------------------------------------|
-| zone    | ID of zone to add record to   |                                                                           |
-| type    | DNS RR Type                   | ("A", "AAAA", "CNAME", "TXT", "MX", "SRV", "NS") and part of valid record |
-| label   | DNS RR Label                  | Less than 255 and part of valid record                                    |
-| value   | DNS RR Value                  | Part of valid record                                                      |
-| ttl     | Time To Live                  | Greater than 0 and part of valid record                                   |
-| proxied | Should the record be proxied? |                                                                           |
+#### Example:
 
-Example response (HTTP 200):
+```shell
+curl -X DELETE \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "user": "user1@example.com"}' \
+  https://packetframe.com/api/dns/zones/user
+```
 
-```json
-{
-  "message": "Record updated"
-}
+#### List DNS records for a zone
+
+`GET /dns/records/:id`
+
+| Name | Description | Validation |
+|------|-------------|------------|
+| zone | Zone ID     |            |
+| user | User email  |            |
+
+#### Example:
+
+```shell
+curl -X DELETE \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "user": "user1@example.com"}' \
+  https://packetframe.com/api/dns/zones/user
+```
+
+#### Add a DNS record to a zone
+
+`POST /dns/records`
+
+| Name    | Description                   | Validation                                                                          |
+|---------|-------------------------------|-------------------------------------------------------------------------------------|
+| zone    | Zone ID                       |                                                                                     |
+| type    | Record Type                   | ("A", "AAAA", "CNAME", "TXT", "MX", "SRV", "NS", "SCRIPT") and part of valid record |
+| label   | Record Label                  | Less than 255 characters and part of valid record                                   |
+| value   | Record Value                  | Part of valid record                                                                |
+| ttl     | Time To Live                  | Greater than 0 and part of valid record                                             |
+
+#### Example:
+
+```shell
+curl -X POST \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "label": "@", "type": "A", "value": "192.0.2.1", "ttl": 300}' \
+  https://packetframe.com/api/dns/records
+```
+
+#### Delete a DNS record from a zone
+
+`DELETE /dns/records`
+
+| Name   | Description  | Validation                                                                          |
+|--------|--------------|-------------------------------------------------------------------------------------|
+| zone   | Zone ID      |                                                                                     |
+| record | Record ID    |                                                                                     |
+
+#### Example:
+
+```shell
+curl -X DELETE \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "id": "967e3a9e-abb3-4bf0-87b8-d03bed13c95f"}' \
+  https://packetframe.com/api/dns/records
+```
+
+#### Update a DNS record
+
+`PUT /dns/records`
+
+| Name  | Description  | Validation                                                                          |
+|-------|--------------|-------------------------------------------------------------------------------------|
+| zone  | Zone ID      |                                                                                     |
+| id    | Record ID    |                                                                                     |
+| type  | Record Type  | ("A", "AAAA", "CNAME", "TXT", "MX", "SRV", "NS", "SCRIPT") and part of valid record |
+| label | Record Label | Less than 255 and part of valid record                                              |
+| value | Record Value | Part of valid record                                                                |
+| ttl   | Time To Live | Greater than 0 and part of valid record                                             |
+
+#### Example:
+
+```shell
+curl -X PUT \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"zone": "62244cdb-edb9-48ea-aeed-bad54bb70f9e", "id": "967e3a9e-abb3-4bf0-87b8-d03bed13c95f", "label": "@", "type": "A", "value": "192.0.2.1", "ttl": 300}' \
+  https://packetframe.com/api/dns/records
 ```

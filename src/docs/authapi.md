@@ -5,40 +5,81 @@ title: Authentication API
 
 # Authentication
 
-#### Signup
+#### Log a user in
 
-`POST /signup`
-
-Required parameters:
+`POST /user/login`
 
 | Name     | Description           | Validation          |
 |----------|-----------------------|---------------------|
 | email    | User's email address  | Email address       |
 | password | User's password       | Min 10 characters   |
 
-Example response (HTTP 200):
+#### Example:
 
-```json
-{
-  "message": "Signup success"
-}
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user1@example.com", "password": "your-password"}' \
+  https://packetframe.com/api/user/login
 ```
 
-#### Login
+#### Create a new user account
 
-`POST /login`
+`POST /user/signup`
 
-Required parameters:
+| Name     | Description                           | Validation        |
+|----------|---------------------------------------|-------------------|
+| email    | User's email address                  | Email address     |
+| password | User's password                       | Min 10 characters |
+| ref      | Where did you hear about Packetframe? |                   |
 
-| Name     | Description           | Validation          |
-|----------|-----------------------|---------------------|
-| email    | User's email address  | Email address       |
-| password | User's password       | Min 10 characters   |
+#### Example:
 
-Example response (HTTP 200):
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user1@example.com", "password": "your-password", "ref": "Nate"}' \
+  https://packetframe.com/api/user/signup
+```
 
-```json
-{
-  "key": "Epk3Xq9X4dPvQjTjY3Odskx17EiiitVSvBTfwla0REC4AvcU"
-}
+#### Delete a user account
+
+`DELETE /user/delete`
+
+#### Example:
+
+```bash
+curl -X DELETE \
+  -H "Authorization: Token <packetframe-api-token>" \
+  https://packetframe.com/api/user/delete
+```
+
+#### Change a user's password
+
+`POST /user/password`
+
+| Name     | Description  | Validation             |
+|----------|--------------|------------------------|
+| password | New password | At least 10 characters |
+
+#### Example:
+
+```bash
+curl -X POST \
+  -H "Authorization: Token <packetframe-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"password": "new-password"}' \
+  https://packetframe.com/api/user/password
+```
+
+#### Get user info
+
+`GET /user/info`
+
+#### Example:
+
+```bash
+curl -X GET \
+  -H "Authorization: Token <packetframe-api-token>" \
+  https://packetframe.com/api/user/info
 ```
