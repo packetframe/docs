@@ -42,3 +42,7 @@ tbody tr:nth-child(even) {
 .mdp-wrapper .sidebar {
 	z-index: 20;
 }
+
+.mdp-wrapper .content.condensed {
+	margin: 0 auto;
+}
